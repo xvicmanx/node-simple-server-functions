@@ -1,17 +1,19 @@
-var request = require('request');
-var path = require('path');
-var fs = require('fs');
+const request = require('request');
+const path = require('path');
+const fs = require('fs');
 const { exec } = require('child_process');
-const tar = require('tar-fs'),
-  zlib = require('zlib');
+const tar = require('tar-fs');
+const zlib = require('zlib');
+const assert = require('assert');
 
-const DESTINATION_PATH = 'http://localhost:3000/push/';
+const port = process.env.PORT || 3000;
+const DESTINATION_PATH = `http://localhost:${port}/push/`;
 const COMPRESSED_FILENAME = 'project.tar.gz';
 
-const push = (dir, funcName) => {
+const push = ({ dir, funcName, destinationPath }) => {
   const readStream = tar.pack(dir).pipe(zlib.Gzip());
   const writeStream = request.post(
-    DESTINATION_PATH + path.basename(COMPRESSED_FILENAME) + '?funcName=' + funcName
+    destinationPath + path.basename(COMPRESSED_FILENAME) + '?funcName=' + funcName
   );
 
   writeStream.on('drain', () => {
@@ -29,4 +31,14 @@ const push = (dir, funcName) => {
   readStream.pipe(writeStream);
 };
 
-push(process.argv[2], process.argv[3]);
+
+(args => {
+  assert.ok(args.funcName, 'Please provide param "funcName"');
+  assert.ok(args.dir, 'Please provide param "dir"');
+
+  push({
+    dir: args.dir,
+    funcName: args.funcName,
+    destinationPath: args.destinationPath || DESTINATION_PATH,
+  });
+})(require('minimist')(process.argv.slice(2)));
