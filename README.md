@@ -16,9 +16,9 @@ And the run start to starting up the server.
 Then in another terminal run the following: 
 
 ```bash
-  npm run push  --dir ./projects/foo/ --funcName foo --destinationPath http://localhost:3000/push/
+  npm run push -- --dir ./projects/foo/ --funcName foo --destinationPath http://localhost:3000/push/
 
-  npm run push  --dir ./projects/bar/ --funcName bar --destinationPath http://localhost:3000/push/
+  npm run push -- --dir ./projects/bar/ --funcName bar --destinationPath http://localhost:3000/push/
 ```
 
 Finally run:
