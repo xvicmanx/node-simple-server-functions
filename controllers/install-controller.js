@@ -54,7 +54,7 @@ const saveFile = (req, cb) => {
 };
 
 module.exports = {
-  save: function (req, res) {
+  install: function (req, res) {
     saveFile(req, (destination, funcName) => {
       console.log('File saved!');
       compile(destination, funcName);
