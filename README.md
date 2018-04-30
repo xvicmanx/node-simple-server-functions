@@ -16,22 +16,30 @@ And the run start to starting up the server.
 Then in another terminal run the following: 
 
 ```bash
-  npm run push -- --dir ./projects/foo/ --funcName foo --host http://localhost:3000 --httpMethod post
+  npm run generate-key -- --description "Test"
+```
+Copy the generated key (`[GENERATED_KEY]`) and save it for future requests.
 
-  npm run push -- --dir ./projects/bar/ --funcName bar --host http://localhost:3000
+
+```bash
+  npm run generate-key -- --description "Test"
+
+  npm run push -- --apikey=[GENERATED_KEY] --dir ./projects/foo/ --funcName foo --host http://localhost:3000 --httpMethod post
+
+  npm run push -- --apikey=[GENERATED_KEY] --dir ./projects/bar/ --funcName bar --host http://localhost:3000
 ```
 
 Finally in that terminal run:
 
 ```bash
-  curl http://localhost:3000/foo?name=John -X POST
-  curl http://localhost:3000/bar
+  curl "http://localhost:3000/foo?name=John&apikey=[GENERATED_KEY]" -X POST
+  curl "http://localhost:3000/bar?apikey=[GENERATED_KEY]"
 ```
 This will return: 
 
 `Hello from helpers John`
 
-`This is bar`
+`This is bar my friend!!`
 
 ## Contributing
 

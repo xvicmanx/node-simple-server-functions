@@ -4,15 +4,19 @@
   "description": "A way to publish your nodejs module functions to be accessed in a Restful API",
   "main": "./lib/index.js",
   "scripts": {
-    "start": "node ./lib/index.js",
-    "push": "node ./lib/pusher.js"
+    "start": "node ./bin/start-server.js",
+    "push": "node ./bin/push.js",
+    "generate-key": "node ./bin/generate-api-key.js"
   },
   "author": "Victor Trejo",
   "license": "MIT",
   "dependencies": {
     "express": "^4.16.3",
     "memory-fs": "^0.4.1",
+    "node-localdb": "0.0.3",
+    "randomstring": "^1.1.5",
     "request": "^2.85.0",
+    "sha1": "^1.1.1",
     "tar-fs": "^1.16.1",
     "webpack": "^4.6.0",
     "zlib": "^1.0.5"
