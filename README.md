@@ -16,15 +16,15 @@ And the run start to starting up the server.
 Then in another terminal run the following: 
 
 ```bash
-  npm run push -- --dir ./projects/foo/ --funcName foo --destinationPath http://localhost:3000/push/
+  npm run push -- --dir ./projects/foo/ --funcName foo --host http://localhost:3000 --httpMethod post
 
-  npm run push -- --dir ./projects/bar/ --funcName bar --destinationPath http://localhost:3000/push/
+  npm run push -- --dir ./projects/bar/ --funcName bar --host http://localhost:3000
 ```
 
-Finally run:
+Finally in that terminal run:
 
 ```bash
-  curl http://localhost:3000/foo?name=John
+  curl http://localhost:3000/foo?name=John -X POST
   curl http://localhost:3000/bar
 ```
 This will return: 
